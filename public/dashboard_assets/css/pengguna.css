@@ -1,0 +1,45 @@
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../../plugin_assets/fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../../plugin_assets/fonts/Poppins-Medium.ttf');
+}
+
+.card-antrian{
+    cursor: pointer;
+    background-color: white;
+    width: 100%;
+    height: 140px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03), 
+    0 2px 4px rgba(0,0,0,0.03), 
+    0 4px 8px rgba(0,0,0,0.03), 
+    0 8px 16px rgba(0,0,0,0.03),
+    0 16px 32px rgba(0,0,0,0.03), 
+    0 32px 64px rgba(0,0,0,0.03);
+    margin-top: 30px;
+    position: relative;
+}
+
+a .card-antrian .title{
+    color: white;
+}
+
+.card-antrian .title{
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    z-index: 2;
+    font-family: 'Poppins-Bold';
+    font-size: 20px;
+}
+
+.img-antrian{
+    position: absolute;
+    z-index: 1;
+    height: 140px;
+    width: 100%;
+    object-fit: cover;   
+}

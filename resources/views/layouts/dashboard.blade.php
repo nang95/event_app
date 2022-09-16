@@ -17,11 +17,6 @@
     <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
     <link href="{{ asset('plugin_assets/weather-icons/weather-icons.min.css') }}" rel="stylesheet" />
 
-    <!--Fonts-->
-    <link
-        href="../fonts.googleapis.com/css@family=open+sans_3a300italic,400italic,600italic,700italic,400,600,700,300.css"
-        rel="stylesheet" type="text/css">
-    <link href='../fonts.googleapis.com/css@family=roboto_3a400,300.css' rel='stylesheet' type='text/css'>
     <!--Beyond styles-->
     <link id="beyond-link" href="{{ asset('dashboard_assets/css/beyond.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('dashboard_assets/css/demo.min.css') }}" rel="stylesheet" />
@@ -29,7 +24,6 @@
     
     {{-- plugins --}}
     <link href="{{ asset('plugin_assets/typicons/typicons.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('plugin_assets/animate.css/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugin_assets/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugin_assets/fontawesome-5.14.0/css/all.css') }}" rel="stylesheet">
     <script src="{{ asset('plugin_assets/sweetalert/sweetalert.min.js') }}"></script>
@@ -41,6 +35,10 @@
 
     <!-- include summernote css/js -->
     <link href="{{ asset('plugin_assets/summernote-0.8.18/summernote.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('plugin_assets/summernote-0.8.18/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard_assets/css/main.css') }}" rel="stylesheet" type="text/css" />
+
     @yield('custom-style')
 </head>
 <!-- /Head -->
@@ -60,7 +58,7 @@
                 <div class="navbar-header pull-left">
                     <a href="#" class="navbar-brand">
                         <small>
-                            <img src="{{ asset('img_assets/white-logo.png') }}" style="width: 80%; height: 40px; object-fit: contain" alt="" srcset="">
+                            <img src="{{ asset('img_assets/logo.png') }}" style="width: 80%; height: 40px; object-fit: contain" alt="" srcset="">
                         </small>
                     </a>
                 </div>
@@ -134,7 +132,7 @@
             <!-- Page Sidebar -->
             <div class="page-sidebar" id="sidebar">
                 <!-- Sidebar Menu -->
-                @include('partials.dashboard.sidebar_admin')
+                @include('partials.sidebar_admin')
                 <!-- /Sidebar Menu -->
             </div>
             <!-- /Page Sidebar -->

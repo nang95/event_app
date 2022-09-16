@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'alata';
+    src: url('../../font_assets/Alata-Regular.ttf');
+}
+
+html, body{
+    font-family: alata !important;
+    margin: 0;
+    padding: 0;
+}
+
 .custom-checkbox{
     width:20px;
     border-radius:20px;

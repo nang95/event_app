@@ -1,4 +1,9 @@
-﻿/*#region Animations*/
+﻿@font-face {
+  font-family: 'alata';
+  src: url('../../font_assets/Alata-Regular.ttf');
+}
+
+/*#region Animations*/
 @-webkit-keyframes borderPulse {
   15% {
     opacity: 1;
@@ -1199,7 +1204,7 @@ html {
 body {
   padding-bottom: 0;
   min-height: 100%;
-  font-family: 'Open Sans', 'Segoe UI' /*rtl:"Droid Arabic Kufi", "WYekan"*/;
+  font-family: alata !important;
   font-size: 13px;
   color: #444444;
 }
@@ -8895,7 +8900,7 @@ button.toast-close-button {
   }
   .flip-scroll thead tr {
     display: block;
-    border: !important;
+    border: 0 !important;
   }
   .flip-scroll thead.bordered-blue > tr > th {
     border-right: 3px solid #5db2ff !important;

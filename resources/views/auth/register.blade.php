@@ -3,8 +3,8 @@
 @section('content')
 <h2>Daftar</h2>
 <h5>Silahkan isi formulir dibawah ini.</h5>
-<form method="POST" action="{{ route('login') }}">
-    @csrf
+<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    @csrf @method('POST')
     <div class="form-group">
         <label for="nip">NIP*</label>
         <input type="text" name="nip" value="{{ old('nip') }}" class="form-control input-sm" id="nip">
@@ -36,6 +36,9 @@
         <label for="jabatan_id">Jabatan*</label>
         <select name="jabatan_id" class="form-control input-sm" id="email">
             <option value="">-Silahkan Pilih-</option>
+            @foreach ($jabatan as $item)
+                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+            @endforeach
         </select>
         @error('jabatan')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -47,6 +50,9 @@
         <label for="golongan_id">Golongan*</label>
         <select name="golongan_id" class="form-control input-sm" id="golongan_id">
             <option value="">-Silahkan Pilih-</option>
+            @foreach ($golongan as $item)
+                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+            @endforeach
         </select>
         @error('golongan_id')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -58,6 +64,9 @@
         <label for="unit_kerja_id">Unit Kerja*</label>
         <select name="unit_kerja_id" class="form-control input-sm" id="unit_kerja_id">
             <option value="">-Silahkan Pilih-</option>
+            @foreach ($unit_kerja as $item)
+                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+            @endforeach
         </select>
         @error('unit_kerja_id')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -69,6 +78,11 @@
         <label for="pendidikan_terakhir">Pendidikan Terakhir*</label>
         <select name="pendidikan_terakhir" class="form-control input-sm" id="pendidikan_terakhir">
             <option value="">-Silahkan Pilih-</option>
+            <option value="SMA">SMA</option>
+            <option value="SMK/Sederajat">SMK/Sederajat</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
         </select>
         @error('pendidikan_terakhir')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -77,11 +91,14 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="bidang_id">Bidang Keahlian*</label>
-        <select name="bidang_id" class="form-control input-sm" id="bidang_id">
+        <label for="bidang_keahlian_id">Bidang Keahlian*</label>
+        <select name="bidang_keahlian_id" class="form-control input-sm" id="bidang_keahlian_id">
             <option value="">-Silahkan Pilih-</option>
+            @foreach ($bidang_keahlian as $item)
+                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+            @endforeach
         </select>
-        @error('bidang_id')
+        @error('bidang_keahlian_id')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
                 <strong>{{ $message }}</strong>
             </span>
@@ -91,6 +108,12 @@
         <label for="kemampuan_peran">Kemampuan Peran*</label>
         <select name="kemampuan_peran" class="form-control input-sm" id="kemampuan_peran">
             <option value="">-Silahkan Pilih-</option>
+            <option value="Instruktur">Instruktur</option>
+            <option value="Penyusunan">Penyusunan</option>
+            <option value="Narasumber">Narasumber</option>
+            <option value="Validator">Validator</option>
+            <option value="Desainer">Desainer</option>
+            <option value="BPO">BPO</option>
         </select>
         @error('kemampuan_peran')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -102,6 +125,10 @@
         <label for="kemampuan_slide">Kemampuan Slide*</label>
         <select name="kemampuan_slide" class="form-control input-sm" id="kemampuan_slide">
             <option value="">-Silahkan Pilih-</option>
+            <option value="0 - 25%">0 - 25%</option>
+            <option value="26 - 50%">26 - 50%</option>
+            <option value="51 - 70%">51 - 70%</option>
+            <option value="71 - 100%">71 - 100%</option>
         </select>
         @error('kemampuan_slide')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
@@ -121,29 +148,17 @@
     <div class="form-group">
         <label for="sertifikat_kompetensi">Sertifikat Kompetensi</label>
         <input type="file" name="sertifikat_kompetensi" class="form-control input-sm" id="sertifikat_kompetensi">
-        @error('sertifikat_kompetensi')
-            <span class="invalid-feedback" role="alert" style="color: #ee1818">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        <strong>format file .pdf</strong>
     </div>
     <div class="form-group">
         <label for="sertifikat_pendukung">Sertifikat Pendukung</label>
         <input type="file" name="sertifikat_pendukung" class="form-control input-sm" id="sertifikat_pendukung">
-        @error('sertifikat_kompetensi')
-            <span class="invalid-feedback" role="alert" style="color: #ee1818">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        <strong>format file .pdf</strong>
     </div>
     <div class="form-group">
         <label for="tanda_tangan">Tanda Tangan</label>
         <input type="file" name="tanda_tangan" class="form-control input-sm" id="tanda_tangan">
-        @error('tanda_tangan')
-            <span class="invalid-feedback" role="alert" style="color: #ee1818">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        <strong>format file .png / .jpg / .jpeg</strong>
     </div>
     <button class="btn btn-primary btn-login">
         <span>Daftar</span>

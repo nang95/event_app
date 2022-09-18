@@ -3,71 +3,68 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Models\{User, Pendaftar, Jabatan, Golongan, UnitKerja, BidangKeahlian};
+use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    public function index(){
+        $jabatan = Jabatan::orderBy('nama', 'asc')->get();
+        $golongan = Golongan::orderBy('nama', 'asc')->get();
+        $unit_kerja = UnitKerja::orderBy('nama', 'asc')->get();
+        $bidang_keahlian = BidangKeahlian::orderBy('nama', 'asc')->get();
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+        return view('auth.register')->with('jabatan', $jabatan)
+                                    ->with('golongan', $golongan)
+                                    ->with('unit_kerja', $unit_kerja)
+                                    ->with('bidang_keahlian', $bidang_keahlian);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    public function insert(Request $request){
+        $data = $request->all();
+        
+        if($request->file('sertifikat_bidang')){
+            $file= $request->file('sertifikat_bidang');
+            $filename= $file->getClientOriginalName();
+            $sertifikat_bidang = $request->file('sertifikat_bidang')->store('sertifikat_bidang');
+            $data['sertifikat_bidang']= $sertifikat_bidang;
+        }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        if($request->file('sertifikat_kompetensi')){
+            $file= $request->file('sertifikat_kompetensi');
+            $filename= $file->getClientOriginalName();
+            $sertifikat_kompetensi = $request->file('sertifikat_kompetensi')->store('sertifikat_kompetensi');
+            $data['sertifikat_kompetensi']= $sertifikat_kompetensi;
+        }
+
+        if($request->file('sertifikat_pendukung')){
+            $file= $request->file('sertifikat_pendukung');
+            $filename= $file->getClientOriginalName();
+            $sertifikat_pendukung = $request->file('sertifikat_pendukung')->store('sertifikat_pendukung');
+            $data['sertifikat_pendukung']= $sertifikat_pendukung;
+        }
+
+        if($request->file('tanda_tangan')){
+            $file= $request->file('tanda_tangan');
+            $filename= $file->getClientOriginalName();
+            $tanda_tangan = $request->file('tanda_tangan')->store('tanda_tangan');
+            $data['tanda_tangan']= $tanda_tangan;
+        }
+
+        $data['status'] = 0;
+        $pendaftar = Pendaftar::create($data); 
+        
+        User::create([
+            'name' => $request->nama,
+            'username' => $request->nip,
+            'password' => Hash::make($request->nip),
+            'email' => $request->nip.'@gmail.com',
+            'user_level' => 'Pendaftar',
         ]);
+
+        return redirect()->back();
     }
 }

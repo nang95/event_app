@@ -16,6 +16,7 @@ class CreateTimsTable extends Migration
         Schema::create('tims', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('file_final_ba');
             $table->unsignedBigInteger('pembelajaran_id');
             $table->foreign('pembelajaran_id')->references('id')->on('pembelajarans')->onDelete('cascade');
             $table->timestamps();

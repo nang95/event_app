@@ -6,9 +6,9 @@
 <form method="POST" action="{{ route('login') }}">
     @csrf
     <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" name="email" value="{{ old('email') }}" class="form-control input-sm" id="email">
-        @error('email')
+        <label for="username">Username</label>
+        <input type="text" name="username" value="{{ old('username') }}" class="form-control input-sm" id="username">
+        @error('username')
             <span class="invalid-feedback" role="alert" style="color: #ee1818">
                 <strong>{{ $message }}</strong>
             </span>

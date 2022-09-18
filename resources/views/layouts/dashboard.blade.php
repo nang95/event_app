@@ -18,7 +18,7 @@
     <link href="{{ asset('plugin_assets/weather-icons/weather-icons.min.css') }}" rel="stylesheet" />
 
     <!--Beyond styles-->
-    <link id="beyond-link" href="{{ asset('dashboard_assets/css/beyond.min.css') }}" rel="stylesheet" type="text/css" />
+    <link id="beyond-link" href="{{ asset('dashboard_assets/css/beyond.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('dashboard_assets/css/demo.min.css') }}" rel="stylesheet" />
     <link id="skin-link" href="" rel="stylesheet" type="text/css" />
     
@@ -132,7 +132,11 @@
             <!-- Page Sidebar -->
             <div class="page-sidebar" id="sidebar">
                 <!-- Sidebar Menu -->
-                @include('partials.sidebar_admin')
+                @if (auth()->user()->user_level == "Admin")
+                    @include('partials.sidebar_admin')
+                @else
+                    @include('partials.sidebar_user')
+                @endif
                 <!-- /Sidebar Menu -->
             </div>
             <!-- /Page Sidebar -->

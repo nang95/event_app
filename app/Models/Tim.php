@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tim extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function pembelajaran(){
+        return $this->belongsTo(Pembelajaran::class);
+    }
 }

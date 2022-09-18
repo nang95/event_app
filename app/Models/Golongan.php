@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Golongan extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function pendaftar(){
+        return $this->hasMany(Pendaftar::class);
+    }
 }

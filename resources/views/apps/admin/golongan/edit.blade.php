@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Type
+    Golongan
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <div class="col-lg-8 col-sm-8">
         <div class="widget">
             <div class="widget-header bordered-top bordered-palegreen">
-                <span class="widget-caption">Tambah Data</span>
+                <span class="widget-caption">Edit Data</span>
             </div>
             
             <div class="widget-body">
@@ -23,12 +23,14 @@
                     </div>
                 @endif
                 <div class="collapse in">
-                    <form role="form" action="{{ route('admin.type.insert') }}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }} {{ method_field('POST') }}
+                    <form role="form" action="{{ route('admin.golongan.update') }}" method="POST">
+                        {{ csrf_field() }} {{ method_field('PUT') }}
+
+                        <input type="hidden" name="id" value="{{ $golongan->id }}">
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control input-sm" id="name">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="nama" value="{{ old('type', $golongan->nama) }}" class="form-control input-sm" id="nama">
                         </div>
 
                         <div class="form-group">
@@ -37,7 +39,7 @@
                                     <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                                 </div>
                                 <div class="col-md-6" style="text-align:right">
-                                    <a href="{{ route('admin.type') }}">
+                                    <a href="{{ route('admin.golongan') }}">
                                         <button class="btn btn-danger btn-sm" type="button">Batal</button>
                                     </a>  
                                 </div>

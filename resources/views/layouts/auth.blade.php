@@ -22,6 +22,8 @@
         </div>
     </div>
 
+    <script src="{{ asset('plugin_assets/jquery-2.1.3/jquery.min.js') }}"></script>
     <script src="{{ asset('plugin_assets/bootstraps-v3.3.6/bootstrap.min.js') }}"></script>
+    @yield('footer-scripts')
 </body>
 </html>

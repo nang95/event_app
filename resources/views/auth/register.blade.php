@@ -157,8 +157,12 @@
     </div>
     <div class="form-group">
         <label for="tanda_tangan">Tanda Tangan</label>
-        <input type="file" name="tanda_tangan" class="form-control input-sm" id="tanda_tangan">
-        <strong>format file .png / .jpg / .jpeg</strong>
+        <div></div>
+        <canvas id="canvas"></canvas>
+        <div style="display: flex">
+            <button type="button" class="btn btn-sm btn-danger" onclick="clearCanvas()">Hapus</button>
+            <button type="button" class="btn btn-sm btn-info" style="margin-left: 5px" onclick="downloadCanvas()">Download</button>
+        </div>
     </div>
     <button class="btn btn-primary btn-login">
         <span>Daftar</span>
@@ -166,4 +170,21 @@
     </button>
     <div class="link">Sudah Punya Akun? <a href="{{ route('login') }}">Masuk</a></div>
 </form>
+@endsection
+
+
+@section('footer-scripts')
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script>
+    const canvas = document.querySelector("canvas");
+    const signaturePad = new SignaturePad(canvas);
+
+    const clearCanvas = () => {
+        signaturePad.clear();
+    }
+
+    const downloadCanvas = () => {
+        console.log(signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...", { ratio: 1, width: 400, height: 200, xOffset: 100, yOffset: 50 }));
+    }
+</script>
 @endsection

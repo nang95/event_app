@@ -121,32 +121,41 @@
                     </div>
                 @endif
                 <div class="collapse in">
-                    <div class="form-group">
-                        <form action="{{ route('admin.pendaftar.update') }}" method="POST">
-                            @csrf @method('PUT')
-                            <input type="hidden" name="{{ $pendaftar->id }}">
-                            <label for="">Status</label>
-                            <select class="form-control input-sm" id="nama">
-                                <option value="">-Silahkan Pilih-</option>
-                                <option value="0">Proses</option>
-                                <option value="1">Ditolak</option>
-                                <option value="2">Diterima</option>
-                            </select>
-                        </form>
-                    </div>                   
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a href="{{ route('admin.pendaftar') }}">
-                                    <button class="btn btn-danger btn-sm" type="button">Kembali</button>
-                                </a>  
-                            </div>
-                            <div class="col-md-6" style="text-align:right">
-                                <button class="btn btn-success btn-sm" type="submit">Simpan</button>
+                    <form action="{{ route('admin.pendaftar.update') }}" method="POST">
+                        <div class="form-group">
+                                @csrf @method('PUT')
+                                <input type="hidden" name="id" value="{{ $pendaftar->id }}">
+                                <label for="">Status</label>
+                                <select name="status" class="form-control input-sm" id="status">
+                                    <option value="">-Silahkan Pilih-</option>
+                                    <option value="0"
+                                        @if ($pendaftar->status == 0)
+                                            selected
+                                        @endif>Proses</option>
+                                    <option value="1"
+                                        @if ($pendaftar->status == 1)
+                                            selected
+                                        @endif>Diterima</option>
+                                    <option value="2"
+                                        @if ($pendaftar->status == 2)
+                                            selected
+                                        @endif>Ditolak</option>
+                                </select>
+                            </div>                   
+                            
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{ route('admin.pendaftar') }}">
+                                        <button class="btn btn-danger btn-sm" type="button">Kembali</button>
+                                    </a>  
+                                </div>
+                                <div class="col-md-6" style="text-align:right">
+                                    <button class="btn btn-success btn-sm" type="submit">Simpan</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

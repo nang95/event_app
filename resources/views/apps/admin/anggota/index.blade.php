@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Pendaftar
+    Anggota
 @endsection
 
 @section('content')
@@ -15,27 +15,14 @@
         <div class="col-lg-12 col-md-12">
             <div class="well with-header with-footer">
                 <div class="header bg-blue">
-                    Data Pendaftar
+                    Data Anggota
                 </div>
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-6"></div>
                     <div class="col-md-6" style="display:flex; justify-content: flex-end">
-                        <form action="{{ route('admin.pendaftar') }}" style="display: flex" method="GET">
+                        <form action="{{ route('admin.anggota') }}" style="display: flex" method="GET">
                             <div class="input-group-sm">
                                 <input type="text" class="form-control" placeholder="nama..." name="q_nama" value="{{ $q_nama }}">
-                            </div>
-                            <div class="input-group-sm" style="margin-left: 10px">
-                                <select class="form-control" name="q_status">
-                                    <option value=""></option>
-                                    <option value="1" 
-                                    @if ($q_status == 1)
-                                        selected
-                                    @endif>Diterima</option>
-                                    <option value="2"
-                                    @if ($q_status == 2)
-                                        selected
-                                    @endif>Ditolak</option>
-                                </select>
                             </div>
                             <div class="input-group-sm" style="margin-left: 10px; display:flex; justify-content: center">
                                 <button class="btn btn-primary btn-sm">Cari</button>
@@ -58,7 +45,7 @@
                                 <th>Bdg. Keahlian</th>
                                 <th>Kem. Peran</th>
                                 <th>Kem. Slide</th>
-                                <th>Status</th>
+                                {{-- <th>Status</th> --}}
                                 {{-- <th>Sert. Bidang</th>
                                 <th>Sert. Kompetensi</th>
                                 <th>Sert. Pendukung</th>
@@ -68,10 +55,10 @@
                         </thead>
                         <tbody>
                             
-                            @if (count($pendaftar) === 0)
+                            @if (count($anggota) === 0)
                             <tr>
                                 <td colspan="8" style="text-align:center">
-                                    @if ($q_nama == "" || $q_status == "")
+                                    @if ($q_nama == "")
                                         <span>Data Kosong</span>
                                     @else
                                         <span>Kriteria yang anda cari tidak sesuai</span>
@@ -80,7 +67,7 @@
                             </tr>
                             @endif
     
-                            @foreach ($pendaftar as $item)
+                            @foreach ($anggota as $item)
                             <tr>
                                 <td>{{ $loop->iteration + $skipped }}</td>
                                 <td>{{ $item->nama }}</td>
@@ -93,7 +80,7 @@
                                 <td>{{ $item->bidangKeahlian->nama }}</td>
                                 <td>{{ $item->kemampuan_peran }}</td>
                                 <td>{{ $item->kemampuan_slide }}</td>
-                                <td>
+                                {{-- <td>
                                     @if ($item->status == 0)
                                         <span class="badge badge-secondary">Proses</span>
                                     @elseif ($item->status == 1)
@@ -101,16 +88,16 @@
                                     @elseif ($item->status == 2)
                                         <span class="badge badge-danger">Ditolak</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 {{-- <td>{{ $item->sertifikat_bidang }}</td>
                                 <td>{{ $item->sertifikat_kompetensi }}</td>
                                 <td>{{ $item->sertifikat_pendukung }}</td>
                                 <td>{{ $item->tanda_tangan }}</td> --}}
                                 <td>
-                                    <a href="{{ route('admin.pendaftar.show', $item->id) }}">
+                                    <a href="{{ route('admin.anggota.show', $item->id) }}">
                                         <button class="btn btn-info btn-sm">Lihat</button>
                                     </a>
-                                    <form onsubmit="deleteThis(event)" action="{{ route('admin.pendaftar.delete') }}" method="POST" style="display:inline-block">
+                                    <form onsubmit="deleteThis(event)" action="{{ route('admin.anggota.delete') }}" method="POST" style="display:inline-block">
                                         {{ csrf_field() }} {{ method_field('DELETE') }}
                                         <input type="hidden" name="id" value="{{ $item->id }}">
                                         <button class="btn btn-danger btn-sm">Hapus</button>
@@ -123,7 +110,7 @@
                 </div>
 
                 <div class="footer">
-                    {{ $pendaftar->appends(['q_nama' => $q_nama, 'q_status' => $q_status])->links() }}
+                    {{ $anggota->appends(['q_nama' => $q_nama])->links() }}
                 </div>
             </div>
 

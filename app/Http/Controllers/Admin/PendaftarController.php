@@ -53,10 +53,11 @@ class PendaftarController extends Controller
     }
 
     public function update(Request $request){
-        $pendaftar = Pendaftar::findOrFail($pendaftar->id);
+        $pendaftar = Pendaftar::findOrFail($request->id);
         $pendaftar->update(['status' => $request->status]);
 
         Session::flash('flash_message', 'Data telah disimpan');
+        return redirect()->route('admin.pendaftar');
     }
 
     /**

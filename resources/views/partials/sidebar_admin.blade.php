@@ -62,6 +62,12 @@
         </a>
         <ul class="submenu">
             <li>
+                <a href="{{ route('admin.anggota') }}">
+                    <div class="fas fa-level-up-alt" style="width: 25px"></div>
+                    <span class="menu-text"> Anggota </span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.pembelajaran') }}">
                     <div class="fas fa-level-up-alt" style="width: 25px"></div>
                     <span class="menu-text"> Pembelajaran </span>

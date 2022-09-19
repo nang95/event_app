@@ -73,6 +73,10 @@ Route::middleware('auth')->group(function(){
         Route::get('pembelajaran/edit/{pembelajaran}', 'PembelajaranController@edit')->name('pembelajaran.edit');
         Route::put('pembelajaran', 'PembelajaranController@update')->name('pembelajaran.update');
         Route::delete('pembelajaran', 'PembelajaranController@delete')->name('pembelajaran.delete');
+
+        Route::get('anggota', 'AnggotaController@index')->name('anggota');
+        Route::get('anggota/show/{anggota}', 'AnggotaController@show')->name('anggota.show');
+        Route::delete('anggota', 'AnggotaController@delete')->name('anggota.delete');
     
         Route::get('tim', 'TimController@index')->name('tim');
         Route::get('tim/create', 'TimController@create')->name('tim.create');

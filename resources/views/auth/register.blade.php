@@ -139,11 +139,7 @@
     <div class="form-group">
         <label for="sertifikat_bidang">Sertifikat Bidang</label>
         <input type="file" name="sertifikat_bidang" class="form-control input-sm" id="sertifikat_bidang">
-        @error('sertifikat_bidang')
-            <span class="invalid-feedback" role="alert" style="color: #ee1818">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        <strong>format file .pdf</strong>
     </div>
     <div class="form-group">
         <label for="sertifikat_kompetensi">Sertifikat Kompetensi</label>
@@ -156,25 +152,36 @@
         <strong>format file .pdf</strong>
     </div>
     <div class="form-group">
-        <label for="tanda_tangan">Tanda Tangan</label>
-        <div></div>
-        <canvas id="canvas"></canvas>
-        <div style="display: flex">
-            <button type="button" class="btn btn-sm btn-danger" onclick="clearCanvas()">Hapus</button>
-            <button type="button" class="btn btn-sm btn-info" style="margin-left: 5px" onclick="downloadCanvas()">Download</button>
-        </div>
+        <label class="" for="">Gambar Tanda Tangan</label>
+        <br/>
+        <div id="sig"></div>
+        <br><br>
+        <button id="clear" class="btn btn-danger btn-sm" type="submit">Hapus</button>
+        <textarea id="signature" name="tanda_tangan" style="display: none"></textarea>
     </div>
-    <button class="btn btn-primary btn-login">
-        <span>Daftar</span>
-        <i class="fa fa-arrow-right"></i>
-    </button>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-sm btn-login">
+            <span>Simpan</span>
+            <i class="fa fa-arrow-right"></i>
+        </button>
+    </div>
+
     <div class="link">Sudah Punya Akun? <a href="{{ route('login') }}">Masuk</a></div>
 </form>
 @endsection
 
 
 @section('footer-scripts')
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script type="text/javascript">
+    var sig = $('#sig').signature({syncField: '#signature', syncFormat: 'PNG'});
+    $('#clear').click(function(e) {
+        e.preventDefault();
+        sig.signature('clear');
+        $("#signature").val('');
+    });
+</script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 <script>
     const canvas = document.querySelector("canvas");
     const signaturePad = new SignaturePad(canvas);
@@ -186,5 +193,5 @@
     const downloadCanvas = () => {
         console.log(signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...", { ratio: 1, width: 400, height: 200, xOffset: 100, yOffset: 50 }));
     }
-</script>
+</script> --}}
 @endsection

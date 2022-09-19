@@ -55,6 +55,13 @@ class RegisterController extends Controller
         }
 
         $data['status'] = 0;
+
+        $image = explode(";base64,", $request->tanda_tangan);
+        $image_type = explode("image/", $image[0]);    
+        $image_base64 = base64_decode($image[1]);
+        Storage::put('tanda_tangan/'.$request->nip.'.jpg', $image_base64);
+
+        $data['tanda_tangan'] = 'tanda_tangan/'.$request->nip.'.jpg';
         $pendaftar = Pendaftar::create($data); 
         
         User::create([
@@ -64,7 +71,6 @@ class RegisterController extends Controller
             'email' => $request->nip.'@gmail.com',
             'user_level' => 'Pendaftar',
         ]);
-
         return redirect()->back();
     }
 }

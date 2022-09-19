@@ -181,17 +181,4 @@
         $("#signature").val('');
     });
 </script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script>
-    const canvas = document.querySelector("canvas");
-    const signaturePad = new SignaturePad(canvas);
-
-    const clearCanvas = () => {
-        signaturePad.clear();
-    }
-
-    const downloadCanvas = () => {
-        console.log(signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...", { ratio: 1, width: 400, height: 200, xOffset: 100, yOffset: 50 }));
-    }
-</script> --}}
 @endsection

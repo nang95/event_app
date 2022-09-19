@@ -63,7 +63,7 @@ class PembelajaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(pembelajaran $pembelajaran)
+    public function edit(Pembelajaran $pembelajaran)
     {
         return view('apps.admin.pembelajaran.edit')->with('pembelajaran', $pembelajaran);
     }

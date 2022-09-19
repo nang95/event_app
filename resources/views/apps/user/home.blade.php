@@ -5,63 +5,78 @@
 @endsection
 
 @section('content')
+@if(Session::has('flash_message'))
+<script type="text/javascript">
+    Swal.fire("Berhasil!","{{ Session('flash_message') }}", "success");
+</script>
+@endif
+
 <div class="row">
     @if ($pendaftar->status == 1)
-    <div class="col-lg-12 col-sm-12">
-        <div class="widget">
-            <div class="widget-body">
-                <div class="text-center">
-                    <div style="font-size: 24px">Data Anda di terima, Silahkan Lanjutkan formulir ini</div>
+        @if ($pendaftar->is_setuju == 0)
+            @include('partials.success_status')
+            @include('partials.setuju_form')
+        @else
+            <div class="col-lg-6 col-md-6">
+                <div class="well with-header with-footer">
+                    <div class="header bg-blue">
+                        Data Anggota Tim
+                    </div>
+                    <table class="table table-hover">
+                        <thead class="bordered-darkorange">
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Peran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            @if (count($anggota_tim) === 0)
+                            <tr>
+                                <td colspan="8" style="text-align:center">
+                                    <span>Tim sedang diproses</span>
+                                </td>
+                            </tr>
+                            @endif
+
+                            @foreach ($anggota_tim as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->pendaftar->nama }}</td>
+                                <td>{{ $item->pendaftar->nip }}</td>
+                                <td>{{ $item->pendaftar->kemampuan_peran }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-sm-4">
-        <div class="widget">
-            <div class="widget-body">
-                <button class="btn btn-info">Download</button>
-                <p></p>
-                <div style="font-weight: bold">Download File BA</div>
-                <p></p>
-                <p></p>
-                <form role="form" action="{{ route('admin.jabatan.insert') }}" method="POST">
-                    {{ csrf_field() }} {{ method_field('POST') }}
 
-                    <div class="form-group">
-                        <label for="nama">Dari data diatas, apakah anda menyetujui?</label>
-                        <select name="nama" value="{{ old('nama') }}"  class="form-control input-sm">
-                            <option value="">-Silahan Pilih-</option>
-                            <option value="">Ya</option>
-                            <option value="">Tidak</option>
-                        </select>
+            @if ($pembelajaran != null)
+            <div class="col-lg-6 col-md-6">
+                <div class="well with-header">
+                    <div class="header bg-blue">
+                        Pembelajaran Tim
                     </div>
-
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-success btn-sm" type="submit">Simpan</button>
-                            </div>
-                            <div class="col-md-6" style="text-align:right">
-                                <a href="{{ route('admin.jabatan') }}">
-                                    <button class="btn btn-danger btn-sm" type="button">Batal</button>
-                                </a>  
-                            </div>
-                        </div>
+                        <label for="nama">Kode Pembelajaran: </label>
+                        <div style="font-size: 16px">{{ $pembelajaran->kode }}</div>
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="nama">Judul Pembelajaran: </label>
+                        <div style="font-size: 16px">{{ $pembelajaran->judul }}</div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            
+            @endif
+        @endif
+    @elseif($pendaftar->status == 2)
+        @include('partials.failed_status')
     @else
-    <div class="col-lg-12 col-sm-12">
-        <div class="widget">
-            <div class="widget-body">
-                <div class="text-center">
-                    <div style="font-size: 24px">Mohon maaf data Anda di tolak</div>
-                </div>
-            </div>
-        </div>
-    </div>
+        @include('partials.proccess_status')
     @endif
 </div>
 @endsection

@@ -16,6 +16,8 @@ Route::middleware('auth')->group(function(){
 
     Route::prefix('/user')->namespace('User')->name('user.')->group(function(){
         Route::get('/', 'HomeController@index')->name('/');
+
+        Route::post('submit_ba', 'HomeController@submitBa')->name('submit_ba');
     });
 
     Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function(){

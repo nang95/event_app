@@ -19,7 +19,7 @@ class TimPendaftarController extends Controller
         $q_nama_pendaftar = $request->q_nama_pendaftar;
         $q_nama_tim = $request->q_nama_tim;
 
-        $pendaftar = Pendaftar::whereNotIn('id', function($query){
+        $pendaftar = Pendaftar::where('is_setuju', 1)->whereNotIn('id', function($query){
             $query->select('pendaftar_id')->from('tim_pendaftars');
         });
 
@@ -46,16 +46,6 @@ class TimPendaftarController extends Controller
                                            ->with('skipped_pendaftar', $skipped_pendaftar)
                                            ->with('q_nama_pendaftar', $q_nama_pendaftar)
                                            ->with('q_nama_tim', $q_nama_tim);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**

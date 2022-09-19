@@ -18,7 +18,7 @@ class PendaftarBaController extends Controller
     {
         $q_nama = $request->q_nama;
         $pendaftar_ba = PendaftarBa::WhereIn('pendaftar_id', function($query){
-            $query->select('id')->from('pendaftars');
+            $query->select('id')->from('pendaftars')->where('is_setuju', 1);
         });
 
         if (!empty($q_nama)) {

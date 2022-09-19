@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => $request->nama,
             'username' => $request->nip,
             'password' => Hash::make($request->nip),
-            'email' => $request->nip.'@gmail.com',
+            'email' => $request->email,
             'user_level' => 'Pendaftar',
         ]);
         return redirect()->back();

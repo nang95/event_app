@@ -17,9 +17,7 @@ class PendaftarBaController extends Controller
     public function index(Request $request)
     {
         $q_nama = $request->q_nama;
-        $pendaftar_ba = PendaftarBa::WhereIn('pendaftar_id', function($query){
-            $query->select('id')->from('pendaftars')->where('is_setuju', 1);
-        });
+        $pendaftar_ba = PendaftarBa::orderBy('id', 'desc');
 
         if (!empty($q_nama)) {
             $pendaftar_ba->where('nama', 'LIKE', '%'.$q_nama.'%');
@@ -80,12 +78,13 @@ class PendaftarBaController extends Controller
         $ba_pendaftar = PendaftarBa::findOrFail($request->id);
 
         $ba_pendaftar->delete();
+        return redirect()->back();
     }
 
     public function generate(){
         $pendaftar = Pendaftar::whereNotIn('id', function($query){
             $query->select('pendaftar_id')->from('pendaftar_bas');
-        })->get();
+        })->where('is_setuju', 0)->get();
 
         foreach ($pendaftar as $item) {
             PendaftarBa::create([

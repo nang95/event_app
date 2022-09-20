@@ -64,9 +64,13 @@
                             <td>{{ $item->pendaftar->nama }}</td>
                             <td>{{ $item->pendaftar->nip }}</td>
                             <td>
+                                @if ($item->file_ba != null)
                                 <a href="{{ route('admin.pendaftar_ba.file_ba', $item->id) }}">
                                     <button class="btn btn-sm btn-info">Download</button>
                                 </a> 
+                                @else
+                                -  
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('admin.pendaftar_ba.edit', $item->id) }}">

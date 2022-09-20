@@ -22,6 +22,14 @@
                     <div class="header bg-blue">
                         Data Anggota Tim
                     </div>
+                    @if ($tim_pendaftar != null)
+                    <a href="{{ route('user.file_final_ba', $pendaftar->id) }}">
+                        <button class="btn btn-info">Download</button>
+                    </a>
+                    <p></p>
+                    <div style="font-weight: bold">Download File Final BA</div>
+                    <p></p><p></p>
+                    @endif
                     <table class="table table-hover">
                         <thead class="bordered-darkorange">
                             <tr>

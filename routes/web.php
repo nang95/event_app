@@ -18,6 +18,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/', 'HomeController@index')->name('/');
 
         Route::post('submit_ba', 'HomeController@submitBa')->name('submit_ba');
+        Route::get('file_ba/{pendaftar}', 'HomeController@fileBa')->name('file_ba');
+        Route::get('file_final_ba/{pendaftar}', 'HomeController@fileFinalBa')->name('file_final_ba');
     });
 
     Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function(){

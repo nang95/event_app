@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Pendaftar, TimPendaftar, Tim, Pembelajaran};
+use App\Models\{Pendaftar, TimPendaftar, Tim, Pembelajaran, PendaftarBa};
 use Session;
 
 class HomeController extends Controller
@@ -23,6 +23,7 @@ class HomeController extends Controller
         
         return view('apps.user.home')->with('pembelajaran', $pembelajaran)
                                      ->with('pendaftar', $pendaftar)
+                                     ->with('tim_pendaftar', $tim_pendaftar)
                                      ->with('anggota_tim', $anggota_tim);
     }
 
@@ -33,5 +34,16 @@ class HomeController extends Controller
 
         Session::flash('flash_message', 'Data telah disimpan');
         return redirect()->back();
+    }
+
+    public function fileBa(Pendaftar $pendaftar){
+        $pendafar_ba = PendaftarBa::where('pendaftar_id', $pendaftar->id)->first();
+        return response()->download(storage_path('app/'. $pendafar_ba->file_ba));
+    }
+
+    public function fileFinalBa(Pendaftar $pendaftar){
+        $tim_pendaftar = TimPendaftar::where('pendaftar_id', $pendaftar->id)->first();
+        $tim = Tim::findOrFail($tim_pendaftar->tim_id);
+        return response()->download(storage_path('app/'. $tim->file_final_ba));
     }
 }

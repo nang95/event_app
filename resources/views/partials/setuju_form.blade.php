@@ -1,9 +1,11 @@
-<div class="col-lg-4 col-sm-4">
+<div class="col-xs-12 col-md-6 col-md-offset-3" style="margin-top: 20px">
     <div class="widget">
         <div class="widget-body">
-            <button class="btn btn-info">Download</button>
-            <p></p>
             <div style="font-weight: bold">Download File BA</div>
+            <p></p>
+            <a href="{{ route('user.file_ba', $pendaftar->id) }}">
+                <button class="btn btn-info">Download</button>
+            </a>
             <p></p>
             <p></p>
             <form role="form" action="{{ route('user.submit_ba') }}" method="POST">

@@ -32,8 +32,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" value="{{ old('nama') }}" class="form-control input-sm" id="nama">
+                            <label for="judul">Judul</label>
+                            <input type="text" name="judul" value="{{ old('judul') }}" class="form-control input-sm" id="judul">
                         </div>
 
                         <div class="form-group">
